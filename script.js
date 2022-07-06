@@ -1,5 +1,5 @@
 // saves options to chrome.storage
-function save_options() {
+const save_options = () => {
   var bool = document.getElementById("options-input").checked;
   chrome.storage.sync.set({
     optionsEnabled: bool,
@@ -13,7 +13,7 @@ function save_options() {
 }
 
 // restores select box and checkbox state using the preferences stored in chrome.storage.
-function restore_options() {
+const restore_options = () => {
   chrome.storage.sync.get({
     optionsEnabled: false,
   }, function(items) {
@@ -21,19 +21,27 @@ function restore_options() {
   });
 }
 
-function getWeather() {
+const getWeather = async () => {
   navigator.geolocation.getCurrentPosition((pos) => {
     var lat = pos.coords.latitude;
     var lon = pos.coords.longitude;
-    console.log(lat + "," + lon);
+    let url = "https://api.openweathermap.org/data/3.0/onecall?lat=" + lat + "&lon=" + lon + "&appid=";
+    
+    await fetch("key.txt").then((response) => {
+      return response.text().then((text) => {
+        url += text;
+      });
+    });
 
-    let url = "https://forecast.weather.gov/MapClick.php?lat=" + lat + "&lon=" + lon + "*/"
+    console.log(url);
+
     fetch(url).then((response) => {
       return response.text().then((text) => {
         var doc = new DOMParser().parseFromString(text, 'text/html');
-          console.log(doc.querySelector(".myforecast-current"));
+          console.log(text);
       });
     });
+
   });
 }
 document.addEventListener("DOMContentLoaded", getWeather);
