@@ -22,27 +22,31 @@ const restore_options = () => {
 }
 
 const getWeather = async () => {
-  navigator.geolocation.getCurrentPosition((pos) => {
-    var lat = pos.coords.latitude;
-    var lon = pos.coords.longitude;
-    let url = "https://api.openweathermap.org/data/3.0/onecall?lat=" + lat + "&lon=" + lon + "&appid=";
-    
-    await fetch("key.txt").then((response) => {
-      return response.text().then((text) => {
-        url += text;
-      });
-    });
+  var lat, lon, key;
 
-    console.log(url);
-
-    fetch(url).then((response) => {
-      return response.text().then((text) => {
-        var doc = new DOMParser().parseFromString(text, 'text/html');
-          console.log(text);
-      });
-    });
-
+  await navigator.geolocation.getCurrentPosition((pos) => {
+    lat = pos.coords.latitude;
+    lon = pos.coords.longitude;
   });
+
+  await fetch("key.txt").then((response) => {
+    return response.text().then((text) => {
+      key = text;
+    });
+  });
+
+  let url = "https://api.openweathermap.org/data/3.0/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + key;
+
+  console.log(url);
+
+  fetch(url).then((response) => {
+    return response.text().then((text) => {
+      var doc = new DOMParser().parseFromString(text, 'text/html');
+        console.log(text);
+    });
+  });
+
+  
 }
 document.addEventListener("DOMContentLoaded", getWeather);
 //document.getElementById("options-input").addEventListener("click", save_options);
