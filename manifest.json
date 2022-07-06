@@ -1,0 +1,13 @@
+{
+    "name": "Widget Weather",
+    "description": "Small weather widget.",
+    "version": "0.1",
+    "permissions": [ "storage", "geolocation" ],
+    "action" : {
+      "default_popup": "popup.html"
+    },
+    "icons": { 
+      "128": "favicon.png" 
+    },
+    "manifest_version": 3
+  }
