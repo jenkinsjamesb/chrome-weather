@@ -17,6 +17,7 @@ body {
     font-size: 12px;
     overflow-y: auto;
     user-select: none;
+    color: var(--text-color);
 }
 
 #container {
@@ -27,6 +28,25 @@ body {
     margin: 0px;
     width: 250px;
     height: 400px;
+}
+
+#container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1%;
+    padding: 1% 2%;
+    background-color: var(--color-main);
+    border-radius: 5px;
+}
+
+input {
+    accent-color: var(--color-fringe);
+}
+
+.temp {
+    font-size: x-large;
 }
 
 /* selection */

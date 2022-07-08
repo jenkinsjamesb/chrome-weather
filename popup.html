@@ -7,7 +7,46 @@
 
   <body>
     <div id="container">
-      Hello World
+      <div id="header">
+        <div>Station: <span id="info-station"></span></div>
+        <div><span id="info-location"></span></div>
+      </div>
+      <div id="current-short">
+        <div class="temp"><span id="info-temp"></span></div>
+        <div><span id="info-clouds"></span></div>
+      </div>
+      <div id="current-long">
+        <div><span id="info-humidity"></span>% Humidity</div>
+        <div>Winds: <span id="info-wind"></span></div>
+      </div>
+      <div id="forecast-hourly">
+        <div></div>
+      </div>
+      <div id="forecast-daily">
+        <div></div>
+      </div>
+      <div id="settings" style="display:none">
+        <form>
+          <div>
+            <p>Temperature:</p>
+            <input type="radio" id="celsius" name="temp_units" value="C">
+            <label for="css">&deg;C</label><br>
+            <input type="radio" id="fahrenheit" name="temp_units" value="F">
+            <label for="html">&deg;F</label><br>
+            <input type="radio" id="kelvin" name="temp_units" value="K">
+            <label for="javascript">&deg;K</label> 
+          </div>
+          <div>
+            <p>Distance/Speed:</p>
+            <input type="radio" id="" name="age" value="30">
+            <label for="age1">km/kmh</label><br>
+            <input type="radio" id="age2" name="age" value="60">
+            <label for="age2">mi/mph</label><br>  
+            <input type="radio" id="age3" name="age" value="100">
+            <label for="age3">km/knots</label>
+          </div>
+        </form>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
