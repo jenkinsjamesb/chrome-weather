@@ -53,14 +53,18 @@ const update = async () => {
 
 const weatherCallback = async (pos) => {
   let gridUrl = "https://api.weather.gov/points/" + pos.coords.latitude + "," + pos.coords.longitude;
-  let forecastUrl;
- 
+  let forecastUrl, gridId, gridX, gridY;
+
+  console.log(gridUrl)
+
   //fetches the grid point based on coords
   await fetch(gridUrl)
     .then(response => response.json())
     .then(data => {
-      console.log(pos.coords.accuracy)
       forecastUrl = data.properties.forecast;
+      gridId = data.properties.gridId;
+      gridX = data.properties.gridX;
+      gridY = data.properties.gridY;
       info.station = data.properties.radarStation;
       locData = data.properties.relativeLocation.properties;
       info.location = locData.city + ", " + locData.state;
@@ -68,6 +72,10 @@ const weatherCallback = async (pos) => {
       update();
     });
 
+  fetch("https://api.weather.gov/gridpoints/" + gridId + "/" + gridX + "," + gridY + "/stations")
+    .then(response => response.json())
+    .then(data => console.log(data));
+  
   //fetches latest observations from the nearest radar station
   fetch("https://api.weather.gov/stations/" + info.station + "/observations/latest")
     .then(response => response.json())
