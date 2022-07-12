@@ -1,11 +1,11 @@
 var info = {
   station: "",
   location: "",
-  currentTemp: 0,
+  currentTemp: "No Data",
   currentClouds: "",
   currentWeather: "",
   currentHumidity: 0,
-  windSpeed: "",
+  windSpeed: "No Data",
   forecastHourly: [],
   forecastDaily: []
 };
@@ -54,7 +54,7 @@ const update = async () => {
 const weatherCallback = async (pos) => {
   let gridUrl = "https://api.weather.gov/points/" + pos.coords.latitude + "," + pos.coords.longitude;
   let forecastUrl;
-
+ 
   //fetches the grid point based on coords
   await fetch(gridUrl)
     .then(response => response.json())
@@ -65,6 +65,7 @@ const weatherCallback = async (pos) => {
       locData = data.properties.relativeLocation.properties;
       info.location = locData.city + ", " + locData.state;
       info.location += " (" + Math.floor(locData.distance.value) + locData.distance.unitCode.replace("wmoUnit:","") + " away)";
+      update();
     });
 
   //fetches latest observations from the nearest radar station
@@ -87,7 +88,7 @@ const weatherCallback = async (pos) => {
       if (windDirection != null) info.wind += " @ " + data.properties.windDirection.value + "\u00B0";
       if (windSpeed == 0 && windDirection == 0) info.wind = "Calm"
 
-      /* //parse this
+      /* //parse this ?
       "presentWeather": [
             {
                 "intensity": null,
@@ -118,7 +119,7 @@ const weatherCallback = async (pos) => {
     .then(data => console.log(data));
 
   //show windspeed/dir & station
-  //TODO: weather alerts
+  //TODO: weather alerts, forecast, fix stations
 }
 
 const getWeather = async () => {
