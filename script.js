@@ -341,13 +341,13 @@ const main = async () => {
 
   rButton.addEventListener("click", () => {
     if (document.getElementById("refresh-button").classList.contains("active")) {
+      toggleSettings();
       sButton.innerText = "\u2699";
       rButton.innerText = "\u27f3";
       sButton.classList.remove("active");
       rButton.classList.remove("active");
-      toggleSettings();
     } else location.reload();
   });
 }
 document.addEventListener("DOMContentLoaded", main);
-//TODO: weather alerts, better tooltips, caching, export/import color themes?
+//TODO: weather alerts, better tooltips, caching, export/import color themes?, pad bottom of forecast for scrollbar?
