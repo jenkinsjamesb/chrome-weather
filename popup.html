@@ -7,45 +7,75 @@
 
   <body>
     <div id="container">
+      <button id="settings-toggle" tabindex=-1>&#x2699</button>
+      <button id="refresh-button" tabindex=-1>&#x27f3</button>
+      <div>chrome-weather</div>
       <div id="header">
-        <div>Station: <span id="info-station"></span></div>
+        <div>Radar Station: <span id="info-station"></span></div>
         <div><span id="info-location"></span></div>
+        <div>(<span id="info-distance"></span> away)</div>
       </div>
       <div id="current-short">
-        <div class="temp"><span id="info-temp"></span></div>
+        <div class="main-temp-text"><span id="info-temp"></span></div>
         <div><span id="info-clouds"></span></div>
       </div>
       <div id="current-long">
         <div><span id="info-humidity"></span>% Humidity</div>
         <div>Winds: <span id="info-wind"></span></div>
       </div>
-      <div id="forecast-hourly">
-        <div></div>
-      </div>
-      <div id="forecast-daily">
-        <div></div>
-      </div>
-      <div id="settings" style="display:none">
-        <form>
+      <div>Hourly Forecast</div>
+      <div id="forecast-hourly" class="forecast-container"></div>
+      <div>14-day Forecast</div>
+      <div id="forecast-daily" class="forecast-container"></div>
+      <div class="settings" style="display: none;">Settings</div>
+      <div class="settings" id="settings-div" style="display: none;">
+        <form id="settings-form">
           <div>
-            <p>Temperature:</p>
-            <input type="radio" id="celsius" name="temp_units" value="C">
-            <label for="css">&deg;C</label><br>
-            <input type="radio" id="fahrenheit" name="temp_units" value="F">
-            <label for="html">&deg;F</label><br>
-            <input type="radio" id="kelvin" name="temp_units" value="K">
-            <label for="javascript">&deg;K</label> 
+            <span>Temperature:</span>
+            <label for="celsius-input">
+              <input type="radio" id="celsius-input" name="temp_units" value="C" tabindex=-1>
+              &deg;C
+            </label>
+            <label for="fahrenheit-input">
+              <input type="radio" id="fahrenheit-input" name="temp_units" value="F" tabindex=-1>
+              &deg;F
+            </label>
           </div>
           <div>
-            <p>Distance/Speed:</p>
-            <input type="radio" id="" name="age" value="30">
-            <label for="age1">km/kmh</label><br>
-            <input type="radio" id="age2" name="age" value="60">
-            <label for="age2">mi/mph</label><br>  
-            <input type="radio" id="age3" name="age" value="100">
-            <label for="age3">km/knots</label>
+            <span>Distance/Speed:</span>
+            <label for="km-input">
+              <input type="radio" id="km-input" name="dist_units" value="km" tabindex=-1>
+              km
+            </label>
+            <label for="mi-input">
+              <input type="radio" id="mi-input" name="dist_units" value="mi" tabindex=-1>
+              mi
+            </label>
           </div>
         </form>
+      </div>
+      <div class="settings" style="display: none;" title="Substitute any color for a valid CSS color string.">Custom Colors</div>
+      <div id="color-settings" class="settings" style="display: none;">
+        <label title="The color used for the background.">
+          Background Color:
+          <input id="bg-input" type="text" placeholder="#333" autocomplete="off">
+        </label>
+        <label title="The color used to shade all the boxes.">
+          Main Color:
+          <input id="main-input" type="text" placeholder="#555" autocomplete="off">
+        </label>
+        <label title="The color used for outlines.">
+          Accent Color:
+          <input id="accent-input" type="text" placeholder="#db0" autocomplete="off">
+        </label>
+        <label title="The color used for niche elements, like the inputs.">
+          Fringe Color:
+          <input id="fringe-input" type="text" placeholder="#afa" autocomplete="off">
+        </label>
+        <label title="The color used for most text.">
+          Text Color:
+          <input id="text-input" type="text" placeholder="#fff" autocomplete="off">
+        </label>
       </div>
     </div>
     <script src="script.js"></script>

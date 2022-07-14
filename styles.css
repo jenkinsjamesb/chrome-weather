@@ -3,8 +3,7 @@
     --color-main: #555;
     --color-accent: #db0;
     --color-fringe: #afa;
-    --text-color: #fff;
-    --border: 2px solid var(--color-accent);
+    --color-text: #fff;
     --transparent: rgba(0,0,0,0);
 }
 
@@ -12,24 +11,69 @@ body {
     background-color: var(--color-bg);
     margin: 0px;
     padding: 0px;
-    color: var(--text-color);
+    color: var(--color-text);
     font-family: "Lucida Console", monospace;
     font-size: 12px;
-    overflow-y: auto;
+    color: var(--color-text);
     user-select: none;
-    color: var(--text-color);
 }
 
+/* top buttons */
+button {
+    background-color: var(--color-main);
+    color: var(--color-text);
+    font-size: large;
+    border: 1px solid var(--color-accent);
+    border-radius: 5px;
+    outline: none;
+    padding: 0px 3px;
+    margin: 0px;
+    position: fixed;
+    top: 2px;
+    transition: all 0.5s;
+}
+
+#settings-toggle {
+    left: 2px;
+}
+
+#refresh-button {
+    right: 2px;
+    padding: 0px 3.5px;
+}
+
+button.active {
+    font-size: 12px;
+    font-family: "Lucida Console", monospace;
+    padding: auto;
+    background-color: var(--color-fringe);
+    color: var(--color-bg);
+}
+
+button:hover {
+    background-color: var(--color-fringe);
+    color: var(--color-bg);
+}
+
+button.active:hover {
+    background-color: var(--color-main);
+    color: var(--color-text);
+}
+
+/* container */
 #container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: auto;
+    height: max-content;
     margin: 0px;
+    padding: 5% 0%;
     width: 250px;
-    height: 400px;
 }
 
+/* info boxes */
 #container > div {
     display: flex;
     flex-direction: column;
@@ -37,20 +81,120 @@ body {
     justify-content: center;
     margin: 1%;
     padding: 1% 2%;
+    max-width: 90%;
     background-color: var(--color-main);
     border-radius: 5px;
+    border: 1px solid var(--color-accent);
+}
+
+/* forecasts */
+#container > div.forecast-container {
+    flex-direction: row;
+    flex-shrink: 0;
+    overflow-x: auto;
+    align-items: unset;
+    justify-content: left;
+    max-width: 90%;
+    padding: 0%;
+    background-color: var(--transparent);
+    border: unset;
+}
+
+.forecast {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 0% 1%;
+    padding: 1% 2%;
+    background-color: var(--color-main);
+    border-radius: 5px;
+    min-width: 40%;
+    max-width: 60%;
+    border: 1px solid var(--color-accent);
+}
+
+/* settings */
+#settings-div {
+    width: auto;
+    max-width: 90%;
+    padding: 1% 2%;
+    user-select: auto;
+}
+
+#color-settings label {
+    margin: 2%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form > div {
+    display: flex;
+    flex-direction: row;
+    margin: 2% 2%;
+}
+
+form label {
+    display: flex;
+    flex-direction: row;
+    margin-right: 5px;
 }
 
 input {
     accent-color: var(--color-fringe);
+    outline: none;
 }
 
-.temp {
+input[type=radio] {
+    position: relative;
+    top: -3px;
+}
+
+input[type=text] {
+    padding: 1px;
+    background: none;
+    border: 0px;
+    border-bottom: 1px solid var(--color-accent);
+    margin-top: 1px;
+    color: var(--color-fringe);
+    font-family: inherit;
+}
+
+/* styling classes */
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-temp-text {
     font-size: x-large;
+}
+
+.temperature-text {
+    font-size: large;
 }
 
 /* selection */
 ::selection {
     color: var(--color-fringe);
     background: rgba(255, 255, 255, 0.3);
+}
+
+::-moz-selection {
+    color: var(--color-fringe);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* placeholder */
+::placeholder {
+    color: var(--color-text);
+    opacity: 0.5;
 }

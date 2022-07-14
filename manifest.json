@@ -1,13 +1,13 @@
 {
     "name": "Widget Weather",
-    "description": "Small weather widget.",
-    "version": "0.1",
+    "description": "Small weather widget, drawing on weather.gov's API for info and terrible code to make it readable.",
+    "version": "0.8",
     "permissions": [ "storage", "geolocation" ],
-    "action" : {
+    "action": {
       "default_popup": "popup.html"
     },
-    "icons": { 
-      "128": "favicon.png" 
+    "icons": {
+      "16": "icons/16.png"
     },
     "manifest_version": 3
   }
