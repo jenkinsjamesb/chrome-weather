@@ -1,3 +1,4 @@
+// Info that gets written to the DOM in update()
 var info = {
   timestamp: Date.now(),
   station: "",
@@ -12,6 +13,7 @@ var info = {
   forecastDaily: []
 };
 
+// Settings that get saved and loaded through chrome storage
 var settings = {
   visible: false,
   useCelsius: false,
@@ -96,7 +98,7 @@ const updateStation = (latUser, lonUser, stationFeatureArr, stationExcludeList =
     let lonStation = station.geometry.coordinates[0] * (Math.PI / 180);
     let latStation = station.geometry.coordinates[1] * (Math.PI / 180);
 
-    // Haversine formula
+    // Haversine formula to find approx. dist between station and user coords (I don't understand this but it does work)
     let dLon = lonUser - lonStation;
     let dLat = latUser - latStation;
     let a = Math.pow(Math.sin(dLat / 2), 2) + Math.cos(latStation) * Math.cos(latUser) * Math.pow(Math.sin(dLon / 2),2);     
@@ -186,7 +188,7 @@ const getObservations = async (pos, availStations, retries = 5) => {
       let isCelsius = data.properties.temperature.unitCode == "wmoUnit:degC";
       let temp = data.properties.temperature.value;
       // If station outage, choose diff station
-      if (temp == null || temp == undefined /*|| data.properties.textDescription == ""*/) { //see if inaccuracy is worth completeness
+      if (temp == null || temp == undefined /*|| data.properties.textDescription == ""*/) { //need to see if inaccuracy is worth completeness
         settings.stationExcludeList.push(info.station);
         updateStation(pos.coords.latitude, pos.coords.longitude, availStations, settings.stationExcludeList);
         getObservations(pos, availStations);
@@ -350,4 +352,4 @@ const main = async () => {
   });
 }
 document.addEventListener("DOMContentLoaded", main);
-//TODO: weather alerts, better tooltips, caching, export/import color themes?, pad bottom of forecast for scrollbar?
+//TODO: icons, weather alerts, better tooltips, export/import color themes as strings?, pad bottom of forecast for styled scrollbar?
