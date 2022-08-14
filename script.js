@@ -20,7 +20,7 @@ var settings = {
   useKilometers: false,
   customColors: {
     bg: "",
-    main: "",
+    fg: "",
     accent: "",
     fringe: "",
     text: ""
@@ -35,7 +35,7 @@ const save_options = async () => {
   var useKilometers = document.getElementById("km-input").checked;
   var customColors = {
     bg: document.getElementById("bg-input").value,
-    main: document.getElementById("main-input").value,
+    fg: document.getElementById("fg-input").value,
     accent: document.getElementById("accent-input").value,
     fringe: document.getElementById("fringe-input").value,
     text: document.getElementById("text-input").value
@@ -55,7 +55,7 @@ const restore_options = async () => {
       useKilometers: true,
       customColors: {
         bg: "",
-        main: "",
+        fg: "",
         accent: "",
         fringe: "",
         text: ""
@@ -70,7 +70,7 @@ const restore_options = async () => {
   
       Object.assign(settings.customColors, items.customColors);
       document.getElementById("bg-input").value = items.customColors.bg;
-      document.getElementById("main-input").value = items.customColors.main;
+      document.getElementById("fg-input").value = items.customColors.fg;
       document.getElementById("accent-input").value = items.customColors.accent;
       document.getElementById("fringe-input").value = items.customColors.fringe;
       document.getElementById("text-input").value = items.customColors.text;
@@ -315,7 +315,7 @@ const main = async () => {
   await restore_options();
   let root = document.querySelector(":root");
   root.style.setProperty("--color-bg", settings.customColors.bg);
-  root.style.setProperty("--color-main", settings.customColors.main);
+  root.style.setProperty("--color-fg", settings.customColors.fg);
   root.style.setProperty("--color-accent", settings.customColors.accent);
   root.style.setProperty("--color-fringe", settings.customColors.fringe);
   root.style.setProperty("--color-text", settings.customColors.text);

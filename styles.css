@@ -1,6 +1,6 @@
 :root {
     --color-bg: #333;
-    --color-main: #555;
+    --color-fg: #555;
     --color-accent: #db0;
     --color-fringe: #afa;
     --color-text: #fff;
@@ -20,7 +20,7 @@ body {
 
 /* top buttons */
 button {
-    background-color: var(--color-main);
+    background-color: var(--color-fg);
     color: var(--color-text);
     font-size: large;
     border: 1px solid var(--color-accent);
@@ -56,7 +56,7 @@ button:hover {
 }
 
 button.active:hover {
-    background-color: var(--color-main);
+    background-color: var(--color-fg);
     color: var(--color-text);
 }
 
@@ -82,7 +82,7 @@ button.active:hover {
     margin: 1%;
     padding: 1% 2%;
     max-width: 90%;
-    background-color: var(--color-main);
+    background-color: var(--color-fg);
     border-radius: 5px;
     border: 1px solid var(--color-accent);
 }
@@ -106,7 +106,7 @@ button.active:hover {
     flex-grow: 1;
     margin: 0% 1%;
     padding: 1% 2%;
-    background-color: var(--color-main);
+    background-color: var(--color-fg);
     border-radius: 5px;
     min-width: 40%;
     max-width: 60%;
