@@ -107,7 +107,8 @@ const updateStation = (latUser, lonUser, stationFeatureArr, stationExcludeList =
     if (nearest == undefined || stationDist < nearest.dist) nearest = {id: stationId, name: stationName, dist: stationDist};
   });
   info.station = nearest.id;
-  info.location = nearest.name.substring(0, 32);
+  info.location = parseForecastText(nearest.name);
+  info.location = info.location.substring(0, 24).trim() + (info.location.length > 24 ? "...":"");
   info.distance = toTenths(nearest.dist) + (settings.useKilometers ? "km":"mi")
 }
 
@@ -124,7 +125,8 @@ const parseForecastText = (text) => {
     ["Wednesday", "Wed."],
     ["Thursday", "Thurs."],
     ["Friday", "Fri."],
-    ["Saturday", "Sat."]
+    ["Saturday", "Sat."],
+    ["International", "Int'l"],
   ];
   if (text.length > 12) key.forEach((swap) => text = text.replace(swap[0], swap[1]));
   return text;
