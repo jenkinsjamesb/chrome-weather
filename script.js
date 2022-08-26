@@ -283,7 +283,7 @@ const weatherCallback = async (pos) => {
       gridY = data.properties.gridY;
       info.station = data.properties.radarStation;
       locData = data.properties.relativeLocation.properties;
-      info.location = locData.city + ", " + locData.state;
+      info.location = locData.city + ", " + locData.state; // Overwritten later in getObservations()
       info.location += " (" + Math.floor(locData.distance.value) + locData.distance.unitCode.replace("wmoUnit:","") + " away)";
     })
     .catch(err => {
@@ -314,7 +314,9 @@ const weatherCallback = async (pos) => {
 }
 
 const main = async () => {
+  // Restore options first
   await restore_options();
+  // Sets :root styles
   let root = document.querySelector(":root");
   root.style.setProperty("--color-bg", settings.customColors.bg);
   root.style.setProperty("--color-fg", settings.customColors.fg);
@@ -323,6 +325,7 @@ const main = async () => {
   root.style.setProperty("--color-text", settings.customColors.text);
   navigator.geolocation.getCurrentPosition(weatherCallback);
 
+  // START settings & reload button handling
   let sButton = document.getElementById("settings-toggle");
   let rButton = document.getElementById("refresh-button");
   sButton.addEventListener("click", () => {
@@ -352,6 +355,8 @@ const main = async () => {
       rButton.classList.remove("active");
     } else location.reload();
   });
+  // END settings & reload button handling
 }
+// On load, run main()
 document.addEventListener("DOMContentLoaded", main);
 //TODO: icons, weather alerts, better tooltips, export/import color themes as strings?, pad bottom of forecast for styled scrollbar?
